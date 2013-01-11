@@ -30,6 +30,12 @@ setup(name='pcommerce.core',
           'Products.SingleKeywordWidget',
           # -*- Extra requirements: -*-
       ],
+      extras_require = {
+        'test': [
+            'plone.app.testing',
+            'Products.SingleKeywordWidget',
+        ]
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
