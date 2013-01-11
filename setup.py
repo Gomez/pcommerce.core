@@ -36,6 +36,8 @@ setup(name='pcommerce.core',
             'Products.SingleKeywordWidget',
             'pcommerce.shipment.parcel',
             'pcommerce.payment.invoice',
+            'robotsuite',
+            'robotframework-selenium2library',
         ]
       },
       entry_points="""
