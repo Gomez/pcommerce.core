@@ -1,5 +1,10 @@
 language: python
 python: "2.7"
+branches:
+  only:
+    - noreg_order
+notifications:
+  irc: "irc.freenode.org#starzel"
 install:
   - mkdir -p buildout-cache/eggs
   - mkdir -p buildout-cache/downloads
