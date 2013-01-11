@@ -22,3 +22,11 @@ class PcommerceTest(unittest.TestCase):
         typesTool = getToolByName(portal, 'portal_types')
         self.assertNotEqual(typesTool.getTypeInfo('Product'), None)
  
+    def test_content_creation(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Product', 'TestProduct')
+        product = portal['TestProduct']
+        self.assertEqual(product.getTitle(), u"TestProduct")
+
+
