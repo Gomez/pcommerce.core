@@ -1,5 +1,7 @@
 import unittest2 as unittest
 
+from zope.component import getUtility
+
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
@@ -8,6 +10,9 @@ from plone.app.testing import quickInstallProduct
 from plone.app.testing import ploneSite
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+
+from plone.testing.z2 import Browser
 
 from Products.CMFCore.utils import getToolByName
 
@@ -28,5 +33,4 @@ class PcommerceTest(unittest.TestCase):
         portal.invokeFactory('Product', 'TestProduct', shipments='pcommerce.shipment.parcel',title='TestProduct')
         product = portal['TestProduct']
         self.assertEqual(product.Title(), u"TestProduct")
-
 

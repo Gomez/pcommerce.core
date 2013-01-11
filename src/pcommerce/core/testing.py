@@ -3,6 +3,7 @@ from plone.testing import z2
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import applyProfile
 from plone.app.testing import quickInstallProduct
 from plone.app.testing import ploneSite
@@ -43,6 +44,8 @@ class pcommerceCoreTddLayer(PloneSandboxLayer):
         z2.uninstallProduct(app, 'pcommerce.shipment.invoice')
 
 PCOMMERCE_TDD_FIXTURE = pcommerceCoreTddLayer()
+PCOMMERCE_FUNCTIONAL_TESTING = FunctionalTesting(bases=(PCOMMERCE_TDD_FIXTURE,), name="pcommerceTddLayer::Functional")
+
 PCOMMERCE_TDD_INTEGRATION_TESTING = IntegrationTesting(
     bases=(PCOMMERCE_TDD_FIXTURE,),
     name="pcommerceTddLayer:Integration")
