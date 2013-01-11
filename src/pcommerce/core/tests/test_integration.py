@@ -25,8 +25,8 @@ class PcommerceTest(unittest.TestCase):
     def test_content_creation(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
-        portal.invokeFactory('Product', 'TestProduct')
+        portal.invokeFactory('Product', 'TestProduct', shipments='pcommerce.shipment.parcel',title='TestProduct')
         product = portal['TestProduct']
-        self.assertEqual(product.getTitle(), u"TestProduct")
+        self.assertEqual(product.Title(), u"TestProduct")
 
 

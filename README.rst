@@ -3,6 +3,9 @@ Introduction
 
 PCommerce (Plone commerce) provides a simple shop system which supports:
 
+.. image:: https://api.travis-ci.org/Gomez/pcommerce.core.png
+    :target: http://travis-ci.org/Gomez/pcommerce.core.png
+
 * product variations
 * multiple prices per product to support special prices per user or group
   (over the sharing tab) and prices only available for a specific time

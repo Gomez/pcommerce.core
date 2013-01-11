@@ -34,6 +34,8 @@ setup(name='pcommerce.core',
         'test': [
             'plone.app.testing',
             'Products.SingleKeywordWidget',
+            'pcommerce.shipment.parcel',
+            'pcommerce.payment.invoice',
         ]
       },
       entry_points="""
