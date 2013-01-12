@@ -33,7 +33,11 @@ class Cart(BrowserView):
     @property
     @memoize
     def checkout(self):
-        return getToolByName(self.context, 'portal_membership').checkPermission(CheckOut, self.context)
+        noregistration = getToolByName(self.context, 'portal_properties').pcommerce_properties.noregistration_order
+        if noregistration:
+            return True
+        else:
+            return getToolByName(self.context, 'portal_membership').checkPermission(CheckOut, self.context)
     
     @property
     @memoize

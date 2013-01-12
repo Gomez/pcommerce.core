@@ -37,7 +37,6 @@ Test Noregistration switch visible
 
     Element Should Be Visible  id=noregistration_order
 
-
 Test Registration needed
     Log in as site owner
     Create Product  My product
@@ -49,4 +48,35 @@ Test Registration needed
     Page should contain  Added item to cart
     Go to  ${front-page}/@@cart
 
-    Page should contain  You have to be registered to check out your order, 
+    Page should contain  You have to be registered to check out your order,
+
+Test No Registration needed
+    Log in as site owner
+    Create Product  My product
+    Page should contain  Changes saved.
+    Go to  ${front-page}/@@pcommerce_configlet
+    Click Element  id=noregistration_order 
+    Click Button  Save
+    Page should contain  Properties saved
+    Log out
+    Go to  ${front-page}/my-product
+    Click Button  add to cart
+    Go to  ${front-page}/@@cart
+
+    Page should not contain  You have to be registered to check out your order,
+
+Test Go trough checkout
+    Set Selenium Speed  0.5 seconds
+    Log in as site owner
+    Create Product  My product
+    Page should contain  Changes saved.
+    Go to  ${front-page}/@@pcommerce_configlet
+    Click Element  id=noregistration_order 
+    Click Button  Save
+    Page should contain  Properties saved
+    Log out
+    Go to  ${front-page}/my-product
+    Click Button  add to cart
+    Go to  ${front-page}/@@cart
+    Click Button  Check out
+    Input text  firstname  My firstname

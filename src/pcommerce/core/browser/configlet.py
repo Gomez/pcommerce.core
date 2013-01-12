@@ -26,21 +26,22 @@ class PCommerceConfiglet(BrowserView):
             adapter = ITaxes(self.context)
             taxes = []
             raw = self.request.form.get('taxes', [])
-            for tax in raw:
-                if not tax.has_key('remove') or not tax['remove']:
-                    try:
-                        tax = {'id': tax['id'],
-                               'tax': float(tax['tax']),
-                               'zone': tax['zone'],
-                               'taxname': tax['taxname']}
-                        if tax['zone'] == '':
-                            self.errors[tax['id']] = _(u'Please provide a zone name')
-                        elif tax['taxname'] == '':
-                            self.errors[tax['id']] = _(u'Please provide a tax name')
-                        if not self.errors.has_key(tax['id']):
-                            taxes.append(tax)
-                    except:
-                        self.errors[tax['id']] = _(u'Please enter a floating point number (e.g. 7.6)')
+            if raw:
+                for tax in raw:
+                    if not tax.has_key('remove') or not tax['remove']:
+                        try:
+                            tax = {'id': tax['id'],
+                                   'tax': float(tax['tax']),
+                                   'zone': tax['zone'],
+                                   'taxname': tax['taxname']}
+                            if tax['zone'] == '':
+                                self.errors[tax['id']] = _(u'Please provide a zone name')
+                            elif tax['taxname'] == '':
+                                self.errors[tax['id']] = _(u'Please provide a tax name')
+                            if not self.errors.has_key(tax['id']):
+                                taxes.append(tax)
+                        except:
+                            self.errors[tax['id']] = _(u'Please enter a floating point number (e.g. 7.6)')
             for prop in self.properties:
                 self.values[prop] = self.request.form.get(prop, '')
             
@@ -66,13 +67,14 @@ class PCommerceConfiglet(BrowserView):
                 for prop in self.properties:
                     if prop == 'columns':
                         self.values[prop] = int(self.values[prop])
+                    if prop == 'noregistration_order':
+                        self.values[prop] = self.values[prop] == 'noregistration_order' and True or False
                     props._setPropValue(prop, self.values[prop])
             else:
                 IStatusMessage(self.request).addStatusMessage(_p(u'Please correct the indicated errors'), 'error')
 
         for prop in self.properties:
             self.values[prop] = props.getProperty(prop, '')
-        
         return self.template()
     
     @property

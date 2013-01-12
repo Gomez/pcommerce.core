@@ -139,7 +139,7 @@
 
                   <div class="widget"
                        tal:define="value view/values/noregistration_order|request/noregistration_order">
-                      <input id="noregistration_order" name="noregistration:boolean" value="1" type="checkbox"
+                      <input id="noregistration_order" name="noregistration_order" value="noregistration_order" type="checkbox"
                              tal:attributes="checked python: value and 'checked' or ''"/>
                   </div>
  
@@ -193,11 +193,9 @@
                       <td>
                         <label><input id="taxes.remove:record" name="taxes.remove:records" value="1" type="checkbox" /> <tal:r i18n:translate="">remove</tal:r></label>
                       </td>
-                      <td>
-                        <tal:error tal:condition="python:errors.has_key(tax['id'])"
+                      <td tal:condition="python:errors.has_key(tax['id'])"
                                    tal:content="python:errors[tax['id']]">
                             The Error
-                        </tal:error>
                       </td>
                     </tr>
                     <tr class="field"
