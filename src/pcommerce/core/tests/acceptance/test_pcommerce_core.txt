@@ -55,7 +55,6 @@ Test Registration needed
     Log in as site owner
     Create Product  My product
     Page should contain  Changes saved.
-    #Workflow Publish
     Log out
     Go to  ${front-page}/my-product
     Click Button  add to cart
