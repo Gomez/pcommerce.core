@@ -13,7 +13,7 @@
         The Error
       </div>
       <label>
-        <input id="test" class="noborder" name="gtc:boolean" type="checkbox" value="1" />
+        <input id="gtc_box" class="noborder" name="gtc:boolean" type="checkbox" value="1" />
         <tal:label i18n:translate="">I accept the <a href="" target="_blank" i18n:name="link" tal:attributes="href view/gtc" i18n:translate="">general terms and conditions</a></tal:label>
       </label>
       <span class="fieldRequired"

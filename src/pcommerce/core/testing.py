@@ -29,15 +29,18 @@ class pcommerceCoreTddLayer(PloneSandboxLayer):
         import Products.SingleKeywordWidget
         import pcommerce.shipment.parcel
         import pcommerce.payment.invoice
+        import collective.MockMailHost        
         self.loadZCML(package=pcommerce.core)
         self.loadZCML(package=pcommerce.shipment.parcel)
         self.loadZCML(package=pcommerce.payment.invoice)
         self.loadZCML(package=Products.SingleKeywordWidget)
+        self.loadZCML(package=collective.MockMailHost)
 
         # Install product and call its initialize() function
         z2.installProduct(app, 'pcommerce.core')
         z2.installProduct(app, 'pcommerce.shipment.parcel')
         z2.installProduct(app, 'pcommerce.shipment.invoice')
+        z2.installProduct(app, 'collective.MockMailHost')
 
         # Note: you can skip this if my.product is not a Zope 2-style
         # product, i.e. it is not in the Products.* namespace and it
@@ -59,13 +62,14 @@ class pcommerceCoreTddLayer(PloneSandboxLayer):
         quickInstallProduct(portal, 'pcommerce.core')
         quickInstallProduct(portal, 'pcommerce.shipment.parcel')
         quickInstallProduct(portal, 'pcommerce.shipment.invoice')
+        quickInstallProduct(portal, 'collective.MockMailHost')
 
     def tearDownZope(self, app):
         # Uninstall product
         z2.uninstallProduct(app, 'pcommerce.core')
         z2.uninstallProduct(app, 'pcommerce.shipment.parcel')
         z2.uninstallProduct(app, 'pcommerce.shipment.invoice')
-
+        z2.uninstallProduct(app, 'collective.MockMailHost')
 
 PCOMMERCE_TDD_FIXTURE = pcommerceCoreTddLayer()
 

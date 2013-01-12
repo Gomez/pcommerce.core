@@ -29,6 +29,20 @@ Create Product
     Input text  title  ${title}
     Click Button  Save
 
+Go through checkout 
+    Go to  ${front-page}/my-product
+    Click Button  add to cart
+    Go to  ${front-page}/@@cart
+    Click Button  Check out
+    Input text  firstname  My firstname
+    Input text  lastname  My lastname
+    Input text  address1  My address1
+    Input text  zip  000000
+    Input text  city  My city
+    Input text  country  My country
+    Input text  email  email@email.com
+    Input text  phone  000000 0000
+
 *** Test Cases ***
 
 Test Noregistration switch visible  
@@ -65,8 +79,7 @@ Test No Registration needed
 
     Page should not contain  You have to be registered to check out your order,
 
-Test Go trough checkout
-    Set Selenium Speed  0.5 seconds
+Test Go through checkout as anonymous
     Log in as site owner
     Create Product  My product
     Page should contain  Changes saved.
@@ -75,8 +88,15 @@ Test Go trough checkout
     Click Button  Save
     Page should contain  Properties saved
     Log out
-    Go to  ${front-page}/my-product
-    Click Button  add to cart
-    Go to  ${front-page}/@@cart
-    Click Button  Check out
-    Input text  firstname  My firstname
+    Go through checkout
+    Click Button  Next step
+    Page should contain  equal to billing address
+    Click Button  Next step
+    Page should contain  equal to customer address
+    Click Button  Next step
+    Page should contain  Overview 
+    Click Element  id=gtc_box
+    Click Button  Send order  
+    Page should contain  We successfully received your order.
+
+ 

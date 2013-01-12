@@ -68,7 +68,13 @@ class PCommerceConfiglet(BrowserView):
                     if prop == 'columns':
                         self.values[prop] = int(self.values[prop])
                     if prop == 'noregistration_order':
-                        self.values[prop] = self.values[prop] == 'noregistration_order' and True or False
+                        noreg_order = self.values[prop] == 'noregistration_order' and True or False
+                        self.values[prop] = noreg_order
+                        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+                        if noreg_order:
+                            portal.manage_permission("PCommerce: Check out", roles=['Anonymous'], acquire=1)
+                        else:
+                            portal.manage_permission("PCommerce: Check out", roles=['Authenticated'], acquire=1)
                     props._setPropValue(prop, self.values[prop])
             else:
                 IStatusMessage(self.request).addStatusMessage(_p(u'Please correct the indicated errors'), 'error')

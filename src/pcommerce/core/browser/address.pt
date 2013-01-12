@@ -207,11 +207,11 @@
   
         <div class="widget">
           <div class="zip_city_wrap">
-            <input class="zip" name="zip" value="" type="text" size="6"
+            <input id="zip" class="zip" name="zip" value="" type="text" size="6"
                    tal:attributes="value data/zip|address/zip|nothing;
                                    name python:tag and tag+'.zip:record' or 'address.zip:record'" />
                    
-            <input class="city" name="city" value="" type="text"
+            <input id="city" class="city" name="city" value="" type="text"
                    tal:attributes="value data/city|address/city|nothing;
                                    name string:${tag}.city:record" />
           </div>
