@@ -33,6 +33,7 @@ setup(name='pcommerce.core',
       extras_require = {
         'test': [
             'plone.app.testing',
+            'plone.act',
             'Products.SingleKeywordWidget',
             'pcommerce.shipment.parcel',
             'pcommerce.payment.invoice',

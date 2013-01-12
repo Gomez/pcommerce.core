@@ -30,6 +30,8 @@ class pcommerceCoreTddLayer(PloneSandboxLayer):
         import pcommerce.shipment.parcel
         import pcommerce.payment.invoice
         self.loadZCML(package=pcommerce.core)
+        self.loadZCML(package=pcommerce.shipment.parcel)
+        self.loadZCML(package=pcommerce.payment.invoice)
         self.loadZCML(package=Products.SingleKeywordWidget)
 
         # Install product and call its initialize() function

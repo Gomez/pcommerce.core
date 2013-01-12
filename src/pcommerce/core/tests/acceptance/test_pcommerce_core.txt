@@ -1,0 +1,52 @@
+*** Settings ***
+
+Library  Selenium2Library  run_on_failure=Capture Page Screenshot
+Variables  plone/app/testing/interfaces.py
+
+Resource  plone/act/keywords.txt
+
+Suite Setup  Start browser
+Suite Teardown  Close All Browsers
+
+*** Variables ***
+
+${front-page}  http://localhost:55001/plone/
+${test-folder}  http://localhost:55001/plone/pcommerce-test-folder
+${control-panel}  http://localhost:55001/plone/@@overview-controlpanel
+
+${PORT} =  55001
+${ZOPE_URL} =  http://localhost:${PORT}
+${PLONE_URL} =  ${ZOPE_URL}/plone
+
+*** Keywords ***
+
+Start browser
+    Open browser  ${front-page}
+
+Create Product
+    [Arguments]  ${title}
+    Go to  ${front-page}/createObject?type_name=Product
+    Input text  title  ${title}
+    Click Button  Save
+
+*** Test Cases ***
+
+Test Noregistration switch visible  
+    Log in as site owner
+    Go to  ${front-page}/@@pcommerce_configlet
+
+    Element Should Be Visible  id=noregistration_order
+
+
+Test Registration needed
+    Log in as site owner
+    Create Product  My product
+    Page should contain  Changes saved.
+    #Workflow Publish
+    Log out
+    Go to  ${front-page}/my-product
+    Click Button  add to cart
+    Page should contain  Added item to cart
+    Go to  ${front-page}/@@cart
+
+    Page should contain  You have to be registered to check out your order, 
