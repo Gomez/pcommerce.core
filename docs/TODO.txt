@@ -8,15 +8,15 @@ Customers
 Membership integration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Integrate order form with site membership, or don't require membership?
+[x] Integrate order form with site membership, or don't require membership? Switch in control panel
 
-The payment process should be easier for customers, now lots of duplicate 
+[] The payment process should be easier for customers, now lots of duplicate 
 data have to be filled in.
 
 Product filtering
 ~~~~~~~~~~~~~~~~~
 
-Filter on product properties to narrow down products (ajax?)
+[] Filter on product properties to narrow down products (ajax?)
 
 
 Vendor
@@ -25,11 +25,11 @@ Vendor
 Order management
 ~~~~~~~~~~~~~~~~
 
-* batching (implemented in 1.0b12)
+[x] batching (implemented in 1.0b12)
 
-* filtering (on status, for example)
+[] filtering (on status, for example)
 
-* Integrate processing here? The current way is rather flimsy: vendor clicks a
+[] Integrate processing here? The current way is rather flimsy: vendor clicks a
   link from an email which takes him to the processOrder page, which redirects
   to a blank page displaying only "order processed".
 
@@ -40,6 +40,6 @@ Order management
 General
 -------
 
-* Layout: currently has own CSS looking like Plone 3. Try styling by adding
+[] Layout: currently has own CSS looking like Plone 3. Try styling by adding
   only classes, so we use Plone's own styling (should work in both 3 and 4). 
-* Translations: replace bare strings with labels and defaults
+[] Translations: replace bare strings with labels and defaults
