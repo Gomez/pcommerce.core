@@ -16,12 +16,14 @@ try:
     from plone import batching
     batching_path = "/".join(batching.__path__)
     batchingfile = '%s/batchnavigation.pt' % batching_path
+    HAS_PLONE43 = True
 except:
     # Plone <= 4.2
     from plone.app.content import browser
     from plone.app.content.batching import Batch
     batching_path = '/'.join(browser.__path__)
     batchingfile = '%s/batching.pt' % batching_path
+    HAS_PLONE43 = False
 
 from pcommerce.core.interfaces import IPricing, IShopFolder, IShop, IProduct
 from pcommerce.core.currency import CurrencyAware
@@ -95,8 +97,13 @@ class ShopFolderListing(BrowserView):
                         'url': url}
             i += 1
             items.append(item)
-        return Batch(items, columns * 5, self.page, 5)
-        
+        #different API - plone.batching
+        #http://stackoverflow.com/questions/16165446/from-plone-app-content-batching-import-batch-fails-with-importerror-no-module-n 
+        if HAS_PLONE43:
+            return Batch(items, size=columns * 5, start=0, end=0, orphan=0, overlap=0, pagerange=7)
+        else:
+            return Batch(items, pagesize=columns * 5, pagenumber=self.page, navlistsize=5)
+
     @property
     @memoize
     def multiple_pages(self):
