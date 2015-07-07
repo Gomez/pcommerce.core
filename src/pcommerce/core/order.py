@@ -386,6 +386,16 @@ class OrderRegistry(Cart):
                    'from_name': email_from_name,
                    'from_email': email_from}
 
+        mapping_user = {'orderid': order.orderid,
+                   'shipments': '\n\n'.join(shipments),
+                   'payment': translate(payment.mailInfo(order, lang), context=request, target_language=lang),
+                   'cart': '\n'.join(cart),
+                   'currency': order.currency,
+                   'address': address.mailInfoUser(request, lang),
+                   'name': address.firstname +' '+ address.lastname,
+                   'from_name': email_from_name,
+                   'from_email': email_from}
+        import ipdb; ipdb.set_trace()
         mailhost = getToolByName(self.context, 'MailHost')
         mailhost.secureSend(translate(self.getMessage(mapping), context=request, target_language=lang),
                             mto=email_from,
@@ -396,7 +406,7 @@ class OrderRegistry(Cart):
         mapping.update({'shipments': '\n\n'.join(shipments_customer),
                         'payment': translate(payment.mailInfo(order, lang, customer=True), context=request, target_language=lang),
                         'address': address.mailInfo(request, lang, True)})
-        mailhost.secureSend(translate(self.getMessageCustomer(mapping), context=request, target_language=lang),
+        mailhost.secureSend(translate(self.getMessageCustomer(mapping_user), context=request, target_language=lang),
                             mto='%s <%s>' % (address.firstname +' '+ address.lastname, address.email),
                             mfrom='%s <%s>' % (email_from_name, email_from),
                             subject=translate(_('email_customer_title', default='Confirmation e-mail'), context=request, target_language=lang),
