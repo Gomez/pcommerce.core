@@ -395,7 +395,6 @@ class OrderRegistry(Cart):
                    'name': address.firstname +' '+ address.lastname,
                    'from_name': email_from_name,
                    'from_email': email_from}
-        import ipdb; ipdb.set_trace()
         mailhost = getToolByName(self.context, 'MailHost')
         mailhost.secureSend(translate(self.getMessage(mapping), context=request, target_language=lang),
                             mto=email_from,
